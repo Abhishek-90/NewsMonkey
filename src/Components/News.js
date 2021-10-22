@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import NewsItem from "./NewsItem";
+import Spinner from "./Spinner";
+import { API_KEY } from "./Secret";
 
 export class News extends Component {
 
@@ -70,25 +72,30 @@ export class News extends Component {
     }
 
     handleupdateClick = async (update) => {
-        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${this.state.page+update}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page+update}&pageSize=${this.props.pageSize}`;
+        this.setState({loading:true});
         const data = await fetch(url);
         const news = await data.json();
 
         this.setState({
             page: this.state.page + update,
             articles:news.articles,
+            loading:false,
         })
     }
 
     async componentDidMount(){
-        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${this.state.page}`;
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        
+        this.setState({loading:true});
+
         const data = await fetch(url);
         const news = await data.json();
         console.log(news.totalResults);
         this.setState({
             articles:news.articles,
-            totalPages: Math.ceil(news.totalResults/20),
-            // totalPages: 5, 
+            totalPages: Math.ceil(news.totalResults/this.props.pageSize),
+            loading:false,
 
         })
     }
@@ -96,10 +103,10 @@ export class News extends Component {
     render() {
         return (
         <div className="container my-4">
-            <h2>News - Important Headlines</h2>
-
+            <h2 className="text-center mb-4 mu-3">News - Important Headlines</h2>
+                {this.state.loading && <Spinner/>}
             <div className="row my-3 mx-3" >
-                {this.state.articles.map((article) =>{
+                {!this.state.loading && this.state.articles.map((article) =>{
                     return <div className="col-md-4" key = {article.url}>
                         <NewsItem
                             title={article.title ? article.title: "No title"}
