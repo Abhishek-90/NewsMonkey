@@ -10,6 +10,7 @@ export class NewsItem extends Component {
             src={urlToImage}
             className="card-img-top"
             alt="related to news"
+            style={{height:'220px', width:'288px'}}
           />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>

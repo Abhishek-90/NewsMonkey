@@ -59,11 +59,23 @@ export class News extends Component {
             },
         
       ]
+
     constructor(){
         super();
         this.state = {
-            articles: this.articles
+            articles: []
         }
+    }
+
+    async componentDidMount(){
+        let url = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4c23e36c9f07473097374db50f3f5a9c';
+        const data = await fetch(url);
+        const news = await data.json();
+        this.setState({
+            articles:news.articles,
+        })
+        
+        // console.log(news.articles)
     }
     
     render() {
@@ -75,8 +87,8 @@ export class News extends Component {
                 {this.state.articles.map((article) =>{
                     return <div className="col-md-4" key = {article.url}>
                         <NewsItem
-                            title={article.title}
-                            description={article.description}
+                            title={article.title ? article.title: "No title"}
+                            description={article.description?article.description:"No Details"}
                             urlToImage={article.urlToImage}
                             newsUrl = {article.url}
                         />
