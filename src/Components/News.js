@@ -63,19 +63,34 @@ export class News extends Component {
     constructor(){
         super();
         this.state = {
-            articles: []
+            articles: [],
+            page: 1,
+            loading: false,
         }
     }
 
-    async componentDidMount(){
-        let url = 'https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4c23e36c9f07473097374db50f3f5a9c';
+    handleupdateClick = async (update) => {
+        let url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${this.state.page+update}`;
         const data = await fetch(url);
         const news = await data.json();
+
         this.setState({
+            page: this.state.page + update,
             articles:news.articles,
         })
-        
-        // console.log(news.articles)
+    }
+
+    async componentDidMount(){
+        let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${this.state.page}`;
+        const data = await fetch(url);
+        const news = await data.json();
+        console.log(news.totalResults);
+        this.setState({
+            articles:news.articles,
+            totalPages: Math.ceil(news.totalResults/20),
+            // totalPages: 5, 
+
+        })
     }
     
     render() {
@@ -95,7 +110,10 @@ export class News extends Component {
                     </div>
                     } 
                 )}
-
+            </div>
+            <div className="container d-flex justify-content-around">
+                <button disabled = {this.state.page <= 1? true:false} type="button" className="btn btn-dark" onClick={()=>this.handleupdateClick(-1)}>&larr; Previous</button>
+                <button disabled = {this.state.page >= this.state.totalPages? true:false} className="btn btn-dark" onClick={()=>this.handleupdateClick(1)}>Next &rarr;</button>
             </div>
         </div>
         );
