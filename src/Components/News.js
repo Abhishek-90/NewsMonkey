@@ -39,50 +39,23 @@ export class News extends Component {
     });
   }
 
-  handlePrevClick = async () => {
-    console.log("Previous");
+  handleUpdate = async (update) => {
+    console.log(`update ${update}`);
     let url = `https://newsapi.org/v2/top-headlines?country=${
       this.props.country
     }&category=${this.props.category}&apiKey=${API_KEY}&page=${
-      this.state.page - 1
+      this.state.page + update
     }&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
     this.setState({
-      page: this.state.page - 1,
+      page: this.state.page + update,
       articles: parsedData.articles,
       loading: false,
-    });
-  };
-
-  handleNextClick = async () => {
-    console.log("Next");
-    if (
-      !(
-        this.state.page + 1 >
-        Math.ceil(this.state.totalResults / this.props.pageSize)
-      )
-    ) {
-      let url = `https://newsapi.org/v2/top-headlines?country=${
-        this.props.country
-      }&category=${
-        this.props.category
-      }&apiKey=${API_KEY}&page=${
-        this.state.page + 1
-      }&pageSize=${this.props.pageSize}`;
-      this.setState({ loading: true });
-      let data = await fetch(url);
-      let parsedData = await data.json();
-      console.log(parsedData);
-      this.setState({
-        page: this.state.page + 1,
-        articles: parsedData.articles,
-        loading: false,
-      });
-    }
-  };
+    });  
+  }
 
   render() {
     return (
@@ -115,7 +88,7 @@ export class News extends Component {
             disabled={this.state.page <= 1}
             type="button"
             className="btn btn-dark"
-            onClick={this.handlePrevClick}
+            onClick={() => this.handleUpdate(-1)}
           >
             &larr; Previous
           </button>
@@ -126,7 +99,7 @@ export class News extends Component {
             }
             type="button"
             className="btn btn-dark"
-            onClick={this.handleNextClick}
+            onClick={() => this.handleUpdate(1)}
           >
             Next &rarr;
           </button>
