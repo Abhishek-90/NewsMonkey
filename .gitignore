@@ -24,3 +24,4 @@ yarn-error.log*
 
 sampleOutput.json
 src/Components/Secret.js
+src/Temp.txt
