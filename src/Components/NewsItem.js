@@ -6,6 +6,7 @@ export class NewsItem extends Component {
       this.props;
     return (
       <div className={`card my-4 bg-${this.props.mode}`}>
+          <span class="badge bg-danger">{source}</span>
         <img src={urlToImage} className="card-img-top" alt="related to news" />
         <div className="card-body ">
           <h5
@@ -36,14 +37,6 @@ export class NewsItem extends Component {
           >
             {" "}
             Author: {author ? author : "Unknown"}
-          </p>
-          <p
-            className={`card-text text-${
-              this.props.mode === "dark" ? "light" : "dark"
-            }`}
-          >
-            {" "}
-            Source: {source ? source : "Unknown"}
           </p>
           <a
             rel="noreferrer"
