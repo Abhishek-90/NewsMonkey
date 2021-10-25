@@ -10,7 +10,6 @@ import React, { useState } from 'react'
 import LoadingBar from 'react-top-loading-bar'
 
 function App() {
-
   let [mode,setMode] = useState('light');
   let [progress,setProgress] = useState(0);
 
@@ -28,6 +27,7 @@ function App() {
   return (
     <>
       <Router>
+      
         <Navbar mode={mode} handleToggle={toggleDarkMode}/> 
         <LoadingBar
           color='#f11946'
