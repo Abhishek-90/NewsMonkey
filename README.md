@@ -6,9 +6,14 @@ Step 1: Go to [News API](https://newsapi.org/)
 Step 2: Sign up and Go to your profile
 
 Step 3: Copy your API Key
+
+
 #---------------------------------------------------
 
-Steps to run NewsMonkey on Your local Machine. 
+
+
+<h1>Steps to run NewsMonkey on Your local Machine.</h1> 
+
 
 Step 1(optional): Fork the repository.
 
