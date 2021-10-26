@@ -1,5 +1,5 @@
 
-Steps to get your API KEY:
+<h1>Steps to get your API KEY</h1>
 
 Step 1: Go to [News API](https://newsapi.org/)
 
@@ -8,12 +8,7 @@ Step 2: Sign up and Go to your profile
 Step 3: Copy your API Key
 
 
-#---------------------------------------------------
-
-
-
 <h1>Steps to run NewsMonkey on Your local Machine.</h1> 
-
 
 Step 1(optional): Fork the repository.
 
@@ -41,5 +36,5 @@ Step 8: Inside terminal go to root folder of the project i.e. NewsMonkey and cop
 Step 9: Go to http://localhost:3000 or the link the terminal gives you.
 
 
-Happy News Reading!
+<h3>Happy News Reading!</h3>
         
