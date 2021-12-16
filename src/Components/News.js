@@ -1,7 +1,7 @@
 import NewsItem from "./NewsItem";
 import Spinner from "./Spinner";
 import PropTypes from "prop-types";
-import { API_KEY } from "./Secret";
+// import { API_KEY } from "./Secret";
 import InfiniteScroll from "react-infinite-scroll-component";
 import React, { useState,useEffect } from 'react'
 
@@ -15,7 +15,7 @@ function News(props) {
   const mount = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
       props.country
-    }&category=${props.category}&apiKey=${API_KEY}&page=${
+    }&category=${props.category}&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${
       page
     }&pageSize=${props.pageSize}`;
 
@@ -38,7 +38,7 @@ function News(props) {
   const fetchMoreData = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=${
         props.country
-      }&category=${props.category}&apiKey=${API_KEY}&page=${
+      }&category=${props.category}&apiKey=4c23e36c9f07473097374db50f3f5a9c&page=${
         page + 1
       }&pageSize=${props.pageSize}`;
       setLoading(true);
